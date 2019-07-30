@@ -39,10 +39,10 @@ const actionToggleGoal = {
   ===== Pure Functions =====
 Characteristics of a Pure Function
 1) They always return the same output if recieving the same inputs
-    - if I call this over and over they will return the same return 
-2) They only depend on argumentss passed into them
-    - the never need variables outside of them 
-    - the reutrn is only depending on what is passed in
+    - if I call this over and over they will return the same output
+2) They only depend on arguments passed into them
+    - never need variables outside of them 
+    - reuturn is only dependent on what is passed in
 3) They never produce any side effects
     - no AJAX
     - no mutation of state
@@ -54,7 +54,7 @@ Reducer
 - must be a pure function 
 - it will take in the current state of our store and return the new state based on the action that was passed in
 
--- the purpose of a reducer is to update that state based on an action occures
+-- the purpose of a reducer is to update the state based on an action that occure
 
 1) takes in current state
 2) takes in specific action
@@ -80,7 +80,7 @@ function todos(state = [], action) {
     return state;
 }
 
-function createStore() {
+function createStore(reducer) {
     // The Store should have four parts:
     // Public facing API for our Store is the following:
     // you can interact with the state by invoking one of the following methods
@@ -93,6 +93,7 @@ function createStore() {
 
     let state;
 
+    // listeners becomes an array of functions that will be looped over eventually and then called to let users know what happened
     let listeners = [];
 
     const getState = () => state;
@@ -105,7 +106,7 @@ function createStore() {
     const dispatch = action => {
         // probably want to call out reducer todo function
 
-        state = todos(state, action);
+        state = reducer(state, action);
         // loop over all listeners and invoke them
 
         listeners.forEach(listener => listener());
@@ -121,7 +122,7 @@ function createStore() {
 
 // From a users stand point
 
-const store = createStore();
+const store = createStore(reducer);
 store.dispatch({
     type: 'ADD_TODO',
     todo: {
