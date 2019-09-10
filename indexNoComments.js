@@ -108,7 +108,7 @@ store.subscribe(() => {
 store.dispatch(
     addTodoAction({
         id: 0,
-        name: 'Learn Redux',
+        namcoe: 'Learn Redux',
         complete: false
     })
 );
