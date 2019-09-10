@@ -15,7 +15,7 @@
 
 -   The state is usualy everywhere in the spread throughout
 
-> What if we put out state all in one location?
+> What if we put our state all in one location?
 
 -   By doing this we can increase our predictablilty!
 -   We can share the cache between all components and don't have to worry about passing props around or lifting state up
